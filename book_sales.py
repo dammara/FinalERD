@@ -19,7 +19,7 @@ def invalid():                                          # Screen for Invalid inp
 
 def welcome():                                          # Splash Screen
     print("""\033[1m
-    ---------SQLite Database Prog Version 1.1--------- \033[0m
+    ---------SQLite Database Prog Version 1.1.1--------- \033[0m
     Welcome. This program will use SQL to create
                   a Full Order System.""")
     time.sleep(2)
@@ -442,12 +442,12 @@ def orders():                                                        # Book Menu
         time.sleep(1.5)
         orders()
     elif o_method == 4:                                          # Deletes from ORDER
+        print("\n\033[1mDELETE EXISTING ORDER\033[0m")
         select_order = "SELECT * from orders"                      # PRINTS LIST OF ORDERS
         theorders = execute_read_query(connection, select_order)
         for order in theorders:
             print(f'\nORDER #: {order[0]} | ORDER DATE: {order[1]}'
             f' | ORDER TOTAL: $ {order[2]} | CUSTOMER ID: {order[3]}')
-        print("\n\033[1mDELETE EXISTING ORDER\033[0m")
         osearching = str(input("ENTER the order number of the order you want to DELETE >>>"))
         osure = input(f"Are you sure you want to delete order {osearching}? (y/n)")
         if osure == 'yes' or osure == 'Yes' or osure == 'y' or osure == 'Y':
