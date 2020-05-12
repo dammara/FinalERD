@@ -7,7 +7,7 @@ from sqlite3 import Error
 from datetime import date, datetime
 
 def exit_prog():                                        # Exit Screen
-    print("\033[1mGoodbye! \033[0m")
+    print("\033[1mExiting Program. Goodbye! \033[0m")
     time.sleep(1)
     exit()
 
@@ -19,15 +19,15 @@ def invalid():                                          # Screen for Invalid inp
 
 def welcome():                                          # Splash Screen
     print("""\033[1m
----------SQLite Database Prog Version 1.1.1--------- \033[0m
+---------SQLite Book-Order Database Version 1.1.2--------- \033[0m
     Welcome. This program will use SQL to create
-                  a Full Order System.""")
+                a Full Order System.""")
     time.sleep(2)
 
 
 def choose():                                           # Main Menu where the user selects customer or books
     print(f"""\n
-                MAIN MENU 
+            MAIN MENU 
 \033[1m ----ENTER the NUMBER (1, 2, 3)---- \033[0m
     1. Customers
     2. Books
@@ -41,15 +41,15 @@ def choose():                                           # Main Menu where the us
         invalid()
         choose()
     if method == 1:                                     # Creates customer table and prints customer menu
-        print("Accessing Customer Menu...")
+        print("\033[1mAccessing Customer Menu...\033[0m")
         time.sleep(1)
         customers()
     elif method == 2:                                   # Creates books table and prints books menu
-        print("Accessing Book Menu...")
+        print("\033[1mAccessing Book Menu...\033[0m")
         time.sleep(1)
         books()
     elif method == 3:                                   # Accesses Orders Menu
-        print("Accessing Orders Menu...")
+        print("\033[1mAccessing Orders Menu...\033[0m")
         time.sleep(1)
         orders()
     elif method == 4:
@@ -113,7 +113,7 @@ CREATE TABLE IF NOT EXISTS book (
 
 create_order_table = """
 CREATE TABLE IF NOT EXISTS orders (
-  order_number INTEGER PRIMARY KEY AUTOINCREMENT UNIQUE,
+  order_number INTEGER PRIMARY KEY,
   order_date TEXT NOT NULL,
   order_total INT NOT NULL,
   cust_id INTEGER,
@@ -138,7 +138,7 @@ CREATE TABLE IF NOT EXISTS orderlineitem (
 
 def customers():                                            # Customer Menu Here
     print(f"""\n
-                CUSTOMER MENU 
+            CUSTOMER MENU 
 \033[1m ----ENTER the NUMBER (1, 2, 3...)---- \033[0m
     1. Add New Customer
     2. Modify Existing Customer
@@ -247,7 +247,7 @@ def customers():                                            # Customer Menu Here
 
 def books():                                                        # Book Menu Here
     print(f"""\n
-                BOOK MENU 
+            BOOK MENU 
 \033[1m ----ENTER the NUMBER (1, 2, 3...)---- \033[0m
     1. Add New Book
     2. Modify Existing Book
@@ -349,7 +349,7 @@ def books():                                                        # Book Menu 
             time.sleep(1.5)
             books()
     elif b_method == 5:
-        print("Returning to Main Menu...")
+        print("\033[1mReturning to Main Menu...\033[0m")
         time.sleep(1)
         choose()
 
@@ -397,7 +397,7 @@ ATTENTION: To modify an order, please delete
             print(f'\nBOOK ID: {book[0]} | TITLE: "{book[1]}" | AUTHOR: {book[2]}'
             f' | ISBN: {book[3]} | EDITION: {book[4]} | PRICE: $ {book[5]} | PUBLISHER: {book[6]}')
         book_id_enter = input("Enter the ID of the Book you want to buy >>>")
-        quantity = int(input(f"How many of the book '{book_id_enter}' do you want to purchase? >>>"))
+        quantity = int(input(f"How many of the book '{book[1]}' do you want to purchase? >>>"))
         cursor = connection.cursor()
         datenow = datetime.now()
         current_day = date.today()
@@ -425,7 +425,7 @@ ATTENTION: To modify an order, please delete
         select_order = "SELECT * from orderlineitem"                   # PRINTS LIST OF ORDERLINEITEMS
         theoli = execute_read_query(connection, select_order)
         for item in theoli:
-            print(f'\nORDER NUMBER: {item[0]} | BOOK ID: {item[1]}'
+            print(f'\nUSER ORDER NUMBER: {item[0]} | BOOK ID: {item[1]}'
             f' | QUANTITY: {item[2]}')
         time.sleep(4)
         print("\033[1mReturning to ORDERS MENU...\033[0m")
@@ -468,7 +468,7 @@ ATTENTION: To modify an order, please delete
             time.sleep(1.5)
             orders()
     elif o_method == 5:
-        print("Returning to Main Menu...")
+        print("\033[1mReturning to Main Menu...\033[0m")
         time.sleep(1)
         choose()
 
