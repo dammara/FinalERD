@@ -19,7 +19,7 @@ def invalid():                                          # Screen for Invalid inp
 
 def welcome():                                          # Splash Screen
     print("""\033[1m
-    ---------SQLite Database Prog Version 1.1.1--------- \033[0m
+---------SQLite Database Prog Version 1.1.1--------- \033[0m
     Welcome. This program will use SQL to create
                   a Full Order System.""")
     time.sleep(2)
@@ -50,6 +50,7 @@ def choose():                                           # Main Menu where the us
         books()
     elif method == 3:                                   # Accesses Orders Menu
         print("Accessing Orders Menu...")
+        time.sleep(1)
         orders()
     elif method == 4:
         exit_prog()
@@ -354,16 +355,16 @@ def books():                                                        # Book Menu 
 
 
 def orders():                                                        # Book Menu Here
-    print(f"""\n
-                ORDERS MENU 
+    print(f"""\n        ORDERS MENU 
 \033[1m ----ENTER the NUMBER (1, 2, 3...)---- \033[0m
     1. Order a Book
     2. Print Order Line Items  
     3. Print a List of ALL Orders
     4. Delete an Order
     5. Return to Main Menu
+ATTENTION: To modify an order, please delete 
+    an existing order and place it again.
     """)
-
     o_method = int(input(">>>"))                                # Method is inputted here
 
     while o_method > 5 or o_method < 1:                         # Invalid Check
@@ -474,20 +475,17 @@ def orders():                                                        # Book Menu
                                                                     # START
 print("Creating Prerequisites...")
 time.sleep(1)
-print("Connect to SQLite database:")
+print("Connecting to SQLite database:")
+time.sleep(0.5)
 connection = create_connection("Final Project")
 time.sleep(1)
-print("Running query to create the tables...")
+print("Running queries to create tables...")
 time.sleep(1)
 execute_query(connection, create_customer_table)
-print("Running query to create the books table...")
 execute_query(connection, create_books_table)
-print("Running query to create the order table...")
 execute_query(connection, create_order_table)
-time.sleep(1)
-print("Running query to create the orderlineitem table...")
 execute_query(connection, create_orderlineitem_table)
-time.sleep(2)
+time.sleep(1.5)
 welcome()
 choose()
 
